@@ -1,0 +1,14 @@
+import "DifferentialRobot.idsl";
+import "Laser.idsl";
+
+Component chocachoca
+{
+    Communications
+    {
+       
+        requires DifferentialRobot, Laser;
+    };
+	language Cpp;
+	gui Qt(QWidget);
+};
+
