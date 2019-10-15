@@ -1,0 +1,8 @@
+/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CMakeFiles/chocachoca.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CMakeFiles/chocachoca_autogen.dir
