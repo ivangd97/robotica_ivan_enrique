@@ -82,6 +82,7 @@ void SpecificWorker::compute()
 	readRobotState();
 
 	/// AQUI LA MAQUINA DE ESTADOS
+    const double pi  =3.141592653589793238463;
 	const float threshold = 200; // millimeters
     float rot = 0.8;  // rads per second
 	int currentState;
@@ -94,21 +95,30 @@ void SpecificWorker::compute()
         if( ldata.front().dist < threshold)
 			currentState = 0;
 		else{
-			if( ldata.front().dist < 500)
+			if( ldata.front().dist < 850){
 				currentState = 1;
+			}
+			else{
+				if(ldata.front().dist > 850){
+			    currentState = 2;
+				}	
+			}
 		}
 		switch(currentState){
 			case 0:
 				std::cout << currentState << std::endl;
 				std::cout << ldata.front().dist << std::endl;
- 				differentialrobot_proxy->setSpeedBase(5, rot);
+ 				differentialrobot_proxy->setSpeedBase(5,-rot);
 				usleep(rand()%(1500000-100000 + 1) + 100000);  // random wait between 1.5s and 0.1sec
-				currentState = 1;
 				break;
 			case 1:
 				std::cout << currentState << std::endl;
+				differentialrobot_proxy->setSpeedBase(5,(ldata.front().angle*pi)/180);
 				differentialrobot_proxy->setSpeedBase(800, 0);
-				currentState = 2;
+				break;
+			case 2:
+			  	std::cout << currentState << std::endl;
+				differentialrobot_proxy->setSpeedBase(800, 0);
 				break;
 			default:
 				std::cout << currentState << std::endl;
