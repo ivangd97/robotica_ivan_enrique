@@ -95,13 +95,20 @@ void SpecificWorker::compute()
         if( ldata.front().dist < threshold)
 			currentState = 0;
 		else{
-			if( ldata.front().dist < 850){
+			if( ldata.front().dist < 1150){
 				currentState = 1;
 			}
 			else{
-				if(ldata.front().dist > 850){
-			    currentState = 2;
-				}	
+				auto [key,cel] = grid.getCell(bState.x,bState.z);
+				auto neig = grid.neighbours();
+				for(int i = 0; i < neig.lenght(); i++){
+					auto [clean,currentCell] = neig.get(i);
+					if(!clean){
+						neig.get(i).free;
+					}
+				}
+				//if()
+				currentState = 2;
 			}
 		}
 		switch(currentState){
@@ -145,7 +152,13 @@ void SpecificWorker::readRobotState()
 		//draw robot
 		robot->setPos(bState.x, bState.z);
 		robot->setRotation(-180.*bState.alpha/M_PI);
-
+		//Print cleaned cells in green
+        auto [clean, cell] = grid.getCell(bState.x, bState.z); 
+		if(clean)
+		{
+			cell.free = false;
+			cell.rect->setBrush(Qt::green);
+		}
 		//update  occupied cells
 		updateOccupiedCells(bState, ldata);
 	}

@@ -74,7 +74,6 @@ private:
 	
 	int tilesize = 70;
 	int xmin, xmax, ymin, ymax;
-
 	RoboCompGenericBase::TBaseState bState;
 	RoboCompLaser::TLaserData ldata;
 
