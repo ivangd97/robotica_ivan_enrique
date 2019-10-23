@@ -71,7 +71,7 @@ private:
 	void draw();
 	QGraphicsRectItem *robot;
 	QGraphicsEllipseItem *noserobot;
-	
+	int acum=0;
 	int tilesize = 70;
 	int xmin, xmax, ymin, ymax;
 	RoboCompGenericBase::TBaseState bState;

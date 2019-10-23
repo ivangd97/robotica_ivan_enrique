@@ -150,7 +150,10 @@ class Grid
 			};
 			return neigh;
 		}	
-     
+     //Public method for get the key of a cell
+	 auto getKey(long int x ,long int Z){
+		 return pointToGrid(x,Z);
+	 }
      
 	private:
 		FMap fmap;

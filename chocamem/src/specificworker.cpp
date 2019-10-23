@@ -82,50 +82,74 @@ void SpecificWorker::compute()
 	readRobotState();
 
 	/// AQUI LA MAQUINA DE ESTADOS
-    const double pi  =3.141592653589793238463;
+   // const double pi  =3.141592653589793238463;
 	const float threshold = 200; // millimeters
     float rot = 0.8;  // rads per second
-	int currentState;
+	int currentState = 3;
     try
     {
     	// read laser data 
         RoboCompLaser::TLaserData ldata = laser_proxy->getLaserData(); 
 		//sort laser data from small to large distances using a lambda function.
         std::sort( ldata.begin(), ldata.end(), [](RoboCompLaser::TData a, RoboCompLaser::TData b){ return     a.dist < b.dist; });  
-        if( ldata.front().dist < threshold)
-			currentState = 0;
+        //this state detec if there is a wall
+		if( ldata.front().dist < threshold){
+			currentState =0;
+		}
 		else{
-			if( ldata.front().dist < 1150){
-				currentState = 1;
+			if(ldata.front().angle>=1.65 && ldata.front().angle<=1.48 &&currentState==2){
+				currentState=3;
+			}
+		//this state is there are any object close
+			if( ldata.front().dist<600){
+			    if(currentState==0){
+				currentState = 4;
+			    }
+				currentState=1;
 			}
 			else{
-				auto [key,cel] = grid.getCell(bState.x,bState.z);
-				auto neig = grid.neighbours();
+				/*auto key = grid.getKey(bState.x,bState.z);
+				auto neig = grid.neighbours(key);
 				for(int i = 0; i < neig.lenght(); i++){
 					auto [clean,currentCell] = neig.get(i);
 					if(!clean){
 						neig.get(i).free;
 					}
+				}*/
+				//in this state if the distance if bigger than 600 the robot move 
+				if(ldata.front().dist<1000 &&currentState!=0){
+					currentState = 2;
+				
 				}
-				//if()
-				currentState = 2;
+				else{
+					currentState = 3;
+				}
 			}
 		}
 		switch(currentState){
 			case 0:
 				std::cout << currentState << std::endl;
 				std::cout << ldata.front().dist << std::endl;
- 				differentialrobot_proxy->setSpeedBase(5,-rot);
-				usleep(rand()%(1500000-100000 + 1) + 100000);  // random wait between 1.5s and 0.1sec
+ 				differentialrobot_proxy->setSpeedBase(5,rot);
+				//usleep(rand()%(1500000-100000 + 1) + 100000);  // random wait between 1.5s and 0.1sec
 				break;
 			case 1:
 				std::cout << currentState << std::endl;
-				differentialrobot_proxy->setSpeedBase(5,(ldata.front().angle*pi)/180);
-				differentialrobot_proxy->setSpeedBase(800, 0);
+				differentialrobot_proxy->setSpeedBase(900, 0.23);
 				break;
 			case 2:
 			  	std::cout << currentState << std::endl;
-				differentialrobot_proxy->setSpeedBase(800, 0);
+ 				differentialrobot_proxy->setSpeedBase(5,ldata.back().angle);
+				differentialrobot_proxy->setSpeedBase(950, 0);
+				break;
+			case 3:
+			    std::cout << currentState << std::endl;
+			    differentialrobot_proxy->setSpeedBase(800, 0);
+				break;	
+			case 4:
+			    std::cout << currentState << std::endl;
+ 				differentialrobot_proxy->setSpeedBase(5,ldata.front().angle);
+				differentialrobot_proxy->setSpeedBase(950, 0);
 				break;
 			default:
 				std::cout << currentState << std::endl;
