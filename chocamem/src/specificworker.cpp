@@ -108,14 +108,6 @@ void SpecificWorker::compute()
 				currentState=1;
 			}
 			else{
-				/*auto key = grid.getKey(bState.x,bState.z);
-				auto neig = grid.neighbours(key);
-				for(int i = 0; i < neig.lenght(); i++){
-					auto [clean,currentCell] = neig.get(i);
-					if(!clean){
-						neig.get(i).free;
-					}
-				}*/
 				//in this state if the distance if bigger than 600 the robot move 
 				if(ldata.front().dist<1000 &&currentState!=0){
 					currentState = 2;
@@ -131,7 +123,6 @@ void SpecificWorker::compute()
 				std::cout << currentState << std::endl;
 				std::cout << ldata.front().dist << std::endl;
  				differentialrobot_proxy->setSpeedBase(5,rot);
-				//usleep(rand()%(1500000-100000 + 1) + 100000);  // random wait between 1.5s and 0.1sec
 				break;
 			case 1:
 				std::cout << currentState << std::endl;
