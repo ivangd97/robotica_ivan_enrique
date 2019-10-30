@@ -29,55 +29,23 @@
 
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
-#include "grid.h"
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QGraphicsEllipseItem>
 
 class SpecificWorker : public GenericWorker
 {
 Q_OBJECT
 public:
-	SpecificWorker(MapPrx& mprx);
+	SpecificWorker(TuplePrx tprx);
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
 
+	void RCISMousePicker_setPick(Pick myPick);
 
 public slots:
 	void compute();
 	void initialize(int period);
 private:
 	std::shared_ptr<InnerModel> innerModel;
-	QGraphicsScene scene;
-	QGraphicsView view;
-	void draw();
-	QGraphicsRectItem *robot;
-	QGraphicsEllipseItem *noserobot;
-	QVec target;
-	QVec currentPoint;
-	std::list<QVec> path;
-	std::vector<QGraphicsEllipseItem *> greenPath;
-	int tilesize;
 
-	void updateOccupiedCells(const RoboCompGenericBase::TBaseState &bState, const RoboCompLaser::TLaserData &ldata);
-
-	/// Grid
-	struct TCell
-	{
-		uint id;
-		bool free;
-		bool visited;
-		QGraphicsRectItem* rect;
-		float cost = 1;
-		
-		// method to save the value
-		void save(std::ostream &os) const {	os << free << " " << visited; };
-		void read(std::istream &is) {	is >> free >> visited ;};
-	};
-		
-	using TDim = Grid<TCell>::Dimensions;
-	Grid<TCell> grid;
-		
 };
 
 #endif

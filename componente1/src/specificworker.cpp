@@ -56,9 +56,35 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 
 void SpecificWorker::initialize(int period)
 {
+	int xmin = -2500;
+	int xmax = 2500;
+	int ymin = -2500;
+	int ymax = 2500;
+	tilesize = 200;
 	std::cout << "Initialize worker" << std::endl;
 	this->Period = period;
 	timer.start(Period);
+
+	scene.setSceneRect(xmin, ymin, fabs(xmin)+fabs(xmax), fabs(ymin)+fabs(ymax));
+	view.setScene(&scene);
+	view.scale(1, -1);
+	view.setParent(scrollArea);
+	view.fitInView(scene.sceneRect(), Qt::KeepAspectRatio );
+
+	grid.initialize( TDim{ tilesize, xmin, xmax, ymin, ymax}, TCell{0, true, false, nullptr, 0.} );
+		
+	for(auto &[key, value] : grid)
+	{
+		auto tile = scene.addRect(-tilesize/2,-tilesize/2, 100,100, QPen(Qt::NoPen));
+		tile->setPos(key.x,key.z);
+		value.rect = tile;
+	}
+
+	robot = scene.addRect(QRectF(-200, -200, 400, 400), QPen(), QBrush(Qt::blue));
+	noserobot = new QGraphicsEllipseItem(-50,100, 100,100, robot);
+	noserobot->setBrush(Qt::magenta);
+		
+	view.show();
 
 }
 
@@ -66,7 +92,7 @@ void SpecificWorker::compute( )
 {
     const float threshold = 200; // millimeters
     float rot = 0.8;  // rads per second
-    float ran=(rand()%1-1);//random number between -1 and 1
+    float ran=(rand()%1-2);//random number between -1 and 1
     try
     {
     	// read laser data 

@@ -1,0 +1,14 @@
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CMakeFiles/choca.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CMakeFiles/choca_autogen.dir

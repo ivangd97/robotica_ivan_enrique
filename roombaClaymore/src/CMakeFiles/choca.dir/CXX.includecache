@@ -68,7 +68,7 @@ QObject
 signal.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/CommonBehavior.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/CommonBehavior.cpp
 CommonBehavior.h
 -
 IceUtil/PushDisableWarnings.h
@@ -86,7 +86,7 @@ Ice/OutputStream.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/DifferentialRobot.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/DifferentialRobot.cpp
 DifferentialRobot.h
 -
 IceUtil/PushDisableWarnings.h
@@ -106,7 +106,7 @@ Ice/LocalException.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/GenericBase.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/GenericBase.cpp
 GenericBase.h
 -
 IceUtil/PushDisableWarnings.h
@@ -126,7 +126,7 @@ Ice/LocalException.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/Laser.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/Laser.cpp
 Laser.h
 -
 IceUtil/PushDisableWarnings.h
@@ -146,37 +146,37 @@ Ice/LocalException.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/EWIEGA46WW/moc_genericmonitor.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/EWIEGA46WW/moc_genericmonitor.cpp
 ../../genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/EWIEGA46WW/moc_genericworker.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/EWIEGA46WW/moc_genericworker.cpp
 ../../genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/EWIEGA46WW/moc_specificmonitor.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/EWIEGA46WW/moc_specificmonitor.cpp
 ../../specificmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/EWIEGA46WW/moc_specificworker.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/EWIEGA46WW/moc_specificworker.cpp
 ../../specificworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/mocs_compilation.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/mocs_compilation.cpp
 EWIEGA46WW/moc_genericmonitor.cpp
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/EWIEGA46WW/moc_genericmonitor.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/EWIEGA46WW/moc_genericmonitor.cpp
 EWIEGA46WW/moc_genericworker.cpp
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/EWIEGA46WW/moc_genericworker.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/EWIEGA46WW/moc_genericworker.cpp
 EWIEGA46WW/moc_specificmonitor.cpp
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/EWIEGA46WW/moc_specificmonitor.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/EWIEGA46WW/moc_specificmonitor.cpp
 EWIEGA46WW/moc_specificworker.cpp
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/chocachoca_autogen/EWIEGA46WW/moc_specificworker.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/choca_autogen/EWIEGA46WW/moc_specificworker.cpp
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/commonbehaviorI.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/commonbehaviorI.cpp
 commonbehaviorI.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/commonbehaviorI.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/commonbehaviorI.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/commonbehaviorI.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/commonbehaviorI.h
 Ice/Ice.h
 -
 CommonBehavior.h
@@ -184,69 +184,57 @@ CommonBehavior.h
 config.h
 -
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericworker.h
 genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/config.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/config.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericmonitor.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericmonitor.cpp
 genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericmonitor.h
 Ice/Ice.h
 -
 QtCore
 -
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericworker.h
 config.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/config.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/config.h
 qlog/qlog.h
 -
 CommonBehavior.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericworker.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericworker.cpp
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericworker.h
 config.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/config.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/config.h
+QtGui
+-
 stdint.h
 -
 qlog/qlog.h
--
-QtWidgets
--
-QtGui
 -
 ui_mainUI.h
 -
 CommonBehavior.h
 -
-GenericBase.h
--
 DifferentialRobot.h
+-
+GenericBase.h
 -
 Laser.h
 -
-
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/grid.h
-unordered_map
--
-boost/functional/hash.hpp
--
-iostream
--
-fstream
--
-queue
+GenericBase.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/main.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/main.cpp
 signal.h
 -
 QtCore
@@ -266,44 +254,42 @@ sigwatch/sigwatch.h
 qlog/qlog.h
 -
 config.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/config.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/config.h
 genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericmonitor.h
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericworker.h
 specificworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificworker.h
 specificmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificmonitor.h
 commonbehaviorI.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/commonbehaviorI.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/commonbehaviorI.h
+DifferentialRobot.h
+-
+GenericBase.h
+-
+Laser.h
+-
 GenericBase.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificmonitor.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificmonitor.cpp
 specificmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificmonitor.h
 genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/genericmonitor.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/genericmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificworker.cpp
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificworker.cpp
 specificworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/specificworker.h
+/home/salabeta/robocomp/components/robotica_ivan_enrique/roombaClaymore/src/specificworker.h
 genericworker.h
 -
 innermodel/innermodel.h
--
-grid.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/componente1/src/grid.h
-QGraphicsScene
--
-QGraphicsView
--
-QGraphicsEllipseItem
 -
 
 /opt/robocomp/include/innermodel/innermodel.h
@@ -2145,18 +2131,6 @@ qfiledialog.h
 /usr/include/qt4/QtGui/QFont
 qfont.h
 /usr/include/qt4/QtGui/qfont.h
-
-/usr/include/qt4/QtGui/QGraphicsEllipseItem
-qgraphicsitem.h
-/usr/include/qt4/QtGui/qgraphicsitem.h
-
-/usr/include/qt4/QtGui/QGraphicsScene
-qgraphicsscene.h
-/usr/include/qt4/QtGui/qgraphicsscene.h
-
-/usr/include/qt4/QtGui/QGraphicsView
-qgraphicsview.h
-/usr/include/qt4/QtGui/qgraphicsview.h
 
 /usr/include/qt4/QtGui/QHeaderView
 qheaderview.h
@@ -4604,11 +4578,11 @@ IceUtil/UndefSysMacros.h
 IceUtil/PopDisableWarnings.h
 -
 
-src/chocachoca_autogen/include/moc_sigwatch.cpp
+src/choca_autogen/include/moc_sigwatch.cpp
 ../../../../../../classes/sigwatch/sigwatch.h
 ../../../classes/sigwatch/sigwatch.h
 
-src/chocachoca_autogen/include/ui_mainUI.h
+src/choca_autogen/include/ui_mainUI.h
 QtCore/QVariant
 -
 QtGui/QAction
@@ -4627,22 +4601,22 @@ src/config.h
 src/genericworker.h
 config.h
 src/config.h
+QtGui
+-
 stdint.h
 -
 qlog/qlog.h
--
-QtWidgets
--
-QtGui
 -
 ui_mainUI.h
 -
 CommonBehavior.h
 -
-GenericBase.h
--
 DifferentialRobot.h
 -
+GenericBase.h
+-
 Laser.h
+-
+GenericBase.h
 -
 
