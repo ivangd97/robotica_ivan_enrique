@@ -1,0 +1,14 @@
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/MyFirstComp.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/MyFirstComp_autogen.dir

@@ -29,7 +29,9 @@
 
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
-
+#include <mutex>
+#include <thread>
+#include <tuple>
 class SpecificWorker : public GenericWorker
 {
 Q_OBJECT
@@ -39,12 +41,29 @@ public:
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
 
 	void RCISMousePicker_setPick(Pick myPick);
+    static std::mutex in_mutex;
+	struct buffer_locker{
+		void write(float x_,float z_){
+			std::lock_guard<std::mutex>lock(in_mutex);
+			x=x_;
+			z=z_;
+		}
+		std::tuple<float,float> read(){
+			std::lock_guard<std::mutex>lock(in_mutex);
+    		return std::make_tuple(x,z);
+		}
+		float x,z;
+		bool activo;
+    };
 
 public slots:
 	void compute();
 	void initialize(int period);
+	
 private:
 	std::shared_ptr<InnerModel> innerModel;
+    RoboCompGenericBase::TBaseState bState;
+	RoboCompLaser::TLaserData ldata;
 
 };
 

@@ -45,12 +45,6 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 //		innerModel = new InnerModel(innermodel_path);
 //	}
 //	catch(std::exception e) { qFatal("Error reading config params"); }
-
-
-
-	
-
-
 	return true;
 }
 
@@ -64,6 +58,7 @@ void SpecificWorker::initialize(int period)
 
 void SpecificWorker::compute()
 {
+
 //computeCODE
 //QMutexLocker locker(mutex);
 //	try
@@ -76,6 +71,12 @@ void SpecificWorker::compute()
 //	{
 //		std::cout << "Error reading from Camera" << e << std::endl;
 //	}
+
+RoboCompGenericBase::TBaseState bState;
+differentialrobot_proxy->getBaseState( bState);
+
+
+
 }
 
 
@@ -84,7 +85,10 @@ void SpecificWorker::compute()
 void SpecificWorker::RCISMousePicker_setPick(Pick myPick)
 {
 //subscribesToCODE
-
+buffer_locker target;
+auto [x,y,z,name]=myPick.ice_tuple();
+target.activo.store(true);
+std::cout<<"Coordenades "<< x << " - "<< y <<" - "<< z << name<<std::endl;
 }
 
 
