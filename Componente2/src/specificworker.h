@@ -29,6 +29,7 @@
 
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
+
 #include <mutex>
 #include <thread>
 #include <tuple>
@@ -39,10 +40,9 @@ public:
 	SpecificWorker(TuplePrx tprx);
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
-
 	void RCISMousePicker_setPick(Pick myPick);
-    static std::mutex in_mutex;
 	struct buffer_locker{
+		std::mutex in_mutex;
 		void write(float x_,float z_){
 			std::lock_guard<std::mutex>lock(in_mutex);
 			x=x_;
@@ -53,7 +53,7 @@ public:
     		return std::make_tuple(x,z);
 		}
 		float x,z;
-		bool activo;
+		bool activo=false;
     };
 
 public slots:
@@ -64,6 +64,10 @@ private:
 	std::shared_ptr<InnerModel> innerModel;
     RoboCompGenericBase::TBaseState bState;
 	RoboCompLaser::TLaserData ldata;
+	buffer_locker target;
+	RoboCompGenericBase::TBaseState pos_robot;
+	float alfa;
+	int currentState=5;
 
 };
 

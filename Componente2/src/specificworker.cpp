@@ -23,7 +23,6 @@
 */
 SpecificWorker::SpecificWorker(TuplePrx tprx) : GenericWorker(tprx)
 {
-
 }
 
 /**
@@ -36,15 +35,15 @@ SpecificWorker::~SpecificWorker()
 
 bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
-//       THE FOLLOWING IS JUST AN EXAMPLE
-//	To use innerModelPath parameter you should uncomment specificmonitor.cpp readConfig method content
-//	try
-//	{
-//		RoboCompCommonBehavior::Parameter par = params.at("InnerModelPath");
-//		std::string innermodel_path = par.value;
-//		innerModel = new InnerModel(innermodel_path);
-//	}
-//	catch(std::exception e) { qFatal("Error reading config params"); }
+	//       THE FOLLOWING IS JUST AN EXAMPLE
+	//	To use innerModelPath parameter you should uncomment specificmonitor.cpp readConfig method content
+	//	try
+	//	{
+	//		RoboCompCommonBehavior::Parameter par = params.at("InnerModelPath");
+	//		std::string innermodel_path = par.value;
+	//		innerModel = new InnerModel(innermodel_path);
+	//	}
+	//	catch(std::exception e) { qFatal("Error reading config params"); }
 	return true;
 }
 
@@ -53,42 +52,105 @@ void SpecificWorker::initialize(int period)
 	std::cout << "Initialize worker" << std::endl;
 	this->Period = period;
 	timer.start(Period);
-
 }
 
 void SpecificWorker::compute()
 {
+	const float threshold = 200; // millimeters
+	float rot = 0.8;			 // rads per second
+	try
+	{
+		RoboCompGenericBase::TBaseState bState;
+		// read laser data
+		RoboCompLaser::TLaserData ldata = laser_proxy->getLaserData();
+		//sort laser data from small to large distances using a lambda function.
+		std::sort(ldata.begin(), ldata.end(), [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
+		//this state detec if there is a wall
+		if (target.activo == true)
+		{
+			currentState = 5;
+		}
+		else{
+			currentState=-1;
+		}
 
-//computeCODE
-//QMutexLocker locker(mutex);
-//	try
-//	{
-//		camera_proxy->getYImage(0,img, cState, bState);
-//		memcpy(image_gray.data, &img[0], m_width*m_height*sizeof(uchar));
-//		searchTags(image_gray);
-//	}
-//	catch(const Ice::Exception &e)
-//	{
-//		std::cout << "Error reading from Camera" << e << std::endl;
-//	}
+		switch (currentState)
+		{
+		case 0:
+			std::cout << currentState << std::endl;
+			std::cout << ldata.front().dist << std::endl;
+			differentialrobot_proxy->setSpeedBase(5, rot);
+			break;
+		case 1:
+			std::cout << currentState << std::endl;
+			differentialrobot_proxy->setSpeedBase(900, 0.23);
+			break;
+		case 2:
+			std::cout << currentState << std::endl;
+			differentialrobot_proxy->setSpeedBase(5, ldata.back().angle);
+			differentialrobot_proxy->setSpeedBase(950, 0);
+			break;
+		//case AVANZAR
+		case 3:
+			std::cout << currentState << std::endl;
+			differentialrobot_proxy->setSpeedBase(800, 0);
+			break;
+		case 4:
+			std::cout << currentState << std::endl;
+			differentialrobot_proxy->setSpeedBase(5, ldata.front().angle);
+			differentialrobot_proxy->setSpeedBase(950, 0);
+			break;
+		//comenzamos estados IDLE,ORIENTAR_BEGIN,ORIENTAR para esperar click
+		//case IDLE
+		case 5:
+			std::cout << currentState << std::endl;
+		    //levamos al robot a ORIENTAR_BEGIN
+			currentState = 6; 
+			differentialrobot_proxy->getBaseState( bState);
+			pos_robot = bState;
+			
+			break;
+		//case ORIENTAR_BEGIN
+		case 6:
+			std::cout << currentState << std::endl;
+			{
+			currentState = 7;
+		    //QVec p = innermodel->transform("robot", QVec::vec3( t.x, 0, t.z), "world");
+			std::tuple<float,float> pos = target.read();
+			QVec tr = innerModel->transform("robot",QVec::vec3(std::get<0>(pos),0,std::get<1>(pos)),"world");
+			alfa = atan2(tr.first(),tr.last());
+			//no avanza pero gira la cantidad alfa
+			differentialrobot_proxy->setSpeedBase(0, alfa);			
+			}
+			break;
+		//case ORIENTAR
+		case 7:
+			std::cout << currentState << std::endl;
+			if(fabs(alfa) < 0.05){
+				differentialrobot_proxy->setSpeedBase(0, 0);			
+				currentState = 3;
+			}
+			break;
+		default:
+			std::cout << currentState << std::endl;
+			//differentialrobot_proxy->setSpeedBase(1000, 0);
+			break;
+		}
+	}
+	catch (const Ice::Exception &ex)
+	{
+		std::cout << ex << std::endl;
+	}
 
-RoboCompGenericBase::TBaseState bState;
-differentialrobot_proxy->getBaseState( bState);
-
-
-
+	//RoboCompGenericBase::TBaseState bState;
+	//differentialrobot_proxy->getBaseState( bState);
 }
-
-
-
 
 void SpecificWorker::RCISMousePicker_setPick(Pick myPick)
 {
-//subscribesToCODE
-buffer_locker target;
-auto [x,y,z,name]=myPick.ice_tuple();
-target.activo.store(true);
-std::cout<<"Coordenades "<< x << " - "<< y <<" - "<< z << name<<std::endl;
+	//subscribesToCODE
+	auto [x, y, z, name] = myPick.ice_tuple();
+	target.activo = true;
+	target.write(x, z);
+	std::cout << "Coordenades " << x << " - " << y << " - " << z << name << std::endl;
 }
-
-
