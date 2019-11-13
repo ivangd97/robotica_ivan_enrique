@@ -67,8 +67,9 @@ private:
 	buffer_locker target;
 	RoboCompGenericBase::TBaseState pos_robot;
 	float alfa;
-	int currentState=5;
-
+	enum class State{CHOQUE,GIRO_ROT,AVANZAR_BACK,AVANZAR,AVANZAR_FRONT,IDLE, ORIENTAR};
+	State currentState = State::IDLE;
+	
 };
 
 #endif
