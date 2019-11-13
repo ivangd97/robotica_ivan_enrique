@@ -59,7 +59,7 @@ void SpecificWorker::initialize(int period)
 void SpecificWorker::compute()
 {
 	const float threshold = 200; // millimeters
-	float rot = 0.8; // rads per second
+	float rot = 0.8;			 // rads per second
 	try
 	{
 		RoboCompGenericBase::TBaseState bState;
@@ -71,15 +71,15 @@ void SpecificWorker::compute()
 		//std::sort(ldata.begin(), ldata.end(), [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
 		//this state detec if there is a wall
 
-		if (ldata.front().dist < threshold)
+		if (target.activo)
 		{
-			currentState = State::CHOQUE;
+			currentState = State::IDLE;
 		}
 		else
 		{
-			if (target.activo)
+			if (currentState == State::ORIENTAR)
 			{
-				currentState = State::IDLE;
+				currentState = State::ORIENTAR;
 			}
 			else
 			{
@@ -109,81 +109,93 @@ void SpecificWorker::compute()
 					}
 				}
 			}
-		}
-			switch (currentState)
+			if (ldata.front().dist < threshold)
 			{
-			case State::CHOQUE:
-				std::cout << "CHOQUE" << std::endl;
-				std::cout << ldata.front().dist << std::endl;
-				differentialrobot_proxy->setSpeedBase(5, rot);
-				break;
-			case State::GIRO_ROT:
-				std::cout << "GIRO_ROT" << std::endl;
-				differentialrobot_proxy->setSpeedBase(900, 0.23);
-				break;
-			case State::AVANZAR_BACK:
-				std::cout << "AVANZAR_BACK" << std::endl;
-				differentialrobot_proxy->setSpeedBase(5, ldata.back().angle);
-				differentialrobot_proxy->setSpeedBase(950, 0);
-				break;
-			//case AVANZAR
-			case State::AVANZAR:
-				std::cout << "AVANZAR" << std::endl;
-				differentialrobot_proxy->setSpeedBase(800, 0);
-				break;
-			case State::AVANZAR_FRONT:
-				std::cout << "AVANZAR_FRONT" << std::endl;
-				differentialrobot_proxy->setSpeedBase(5, ldata.front().angle);
-				differentialrobot_proxy->setSpeedBase(950, 0);
-				break;
-			//comenzamos estados IDLE,ORIENTAR_BEGIN,ORIENTAR para esperar click
-			//case IDLE
-			case State::IDLE:
-				std::cout << "IDLE" << std::endl;
-				//levamos al robot a ORIENTAR
-				if (target.activo == true)
-				{
-					currentState = State::ORIENTAR;
-					pos_robot = bState;
-				}
-
-			//case ORIENTAR
-			case State::ORIENTAR:
-				std::cout << "ORIENTAR" << std::endl;
-				{
-					//QVec p = innermodel->transform("robot", QVec::vec3( t.x, 0, t.z), "world");
-					std::tuple<float, float> pos = target.read();
-					QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
-					alfa = atan2(tr.x(), tr.z());
-					//no avanza pero gira la cantidad alfa
-					differentialrobot_proxy->setSpeedBase(0, alfa);
-					if (fabs(alfa) < 0.1)
-					{
-						differentialrobot_proxy->setSpeedBase(600, 0.1);
-						break;
-					}
-				}
-
-			default:
-				std::cout << "DEFAULT" << std::endl;
-				//differentialrobot_proxy->setSpeedBase(0, 0);
-				break;
+				currentState = State::CHOQUE;
 			}
 		}
-		catch (const Ice::Exception &ex)
+		switch (currentState)
 		{
-			std::cout << ex << std::endl;
+		case State::CHOQUE:
+			std::cout << "CHOQUE" << std::endl;
+			std::cout << ldata.front().dist << std::endl;
+			differentialrobot_proxy->setSpeedBase(5, -rot);
+			break;
+		case State::GIRO_ROT:
+			std::cout << "GIRO_ROT" << std::endl;
+			differentialrobot_proxy->setSpeedBase(800, 0.23);
+			break;
+		case State::AVANZAR_BACK:
+			std::cout << "AVANZAR_BACK" << std::endl;
+			differentialrobot_proxy->setSpeedBase(5, ldata.back().angle);
+			differentialrobot_proxy->setSpeedBase(850, 0);
+			break;
+		//case AVANZAR
+		case State::AVANZAR:
+			std::cout << "AVANZAR" << std::endl;
+			//std::tuple<float, float> pos = target.read();
+			//QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
+			// A = (tr.x() - bState.x);
+			// B = -(tr.z() - bState.z);
+			//C = -(B * bState.z) - (A * bState.x); 
+			differentialrobot_proxy->setSpeedBase(800, 0);
+			target.activo=true;
+			break;
+
+		case State::AVANZAR_FRONT:
+			std::cout << "AVANZAR_FRONT" << std::endl;
+			differentialrobot_proxy->setSpeedBase(5, ldata.front().angle);
+			differentialrobot_proxy->setSpeedBase(850, 0);
+			break;
+		//comenzamos estados IDLE,ORIENTAR_BEGIN,ORIENTAR para esperar click
+		//case IDLE
+		case State::IDLE:
+			std::cout << "IDLE" << std::endl;
+			//levamos al robot a ORIENTAR
+			if (target.activo == true)
+			{
+				currentState = State::ORIENTAR;
+				pos_robot = bState;
+				target.activo = false;
+			}
+
+		//case ORIENTAR
+		case State::ORIENTAR:
+			std::cout << "ORIENTAR" << std::endl;
+			{
+				//QVec p = innermodel->transform("robot", QVec::vec3( t.x, 0, t.z), "world");
+				std::tuple<float, float> pos = target.read();
+				QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
+				alfa = atan2(tr.x(), tr.z());
+				//no avanza pero gira la cantidad alfa
+				differentialrobot_proxy->setSpeedBase(0, alfa);
+				if (fabs(alfa) < 0.1)
+				{
+					differentialrobot_proxy->setSpeedBase(800, 0);
+				}
+				break;
+			}
+
+		default:
+			std::cout << "DEFAULT" << std::endl;
+			//differentialrobot_proxy->setSpeedBase(0, 0);
+			break;
 		}
-
-		//RoboCompGenericBase::TBaseState bState;
-		//differentialrobot_proxy->getBaseState( bState);
 	}
-
-	void SpecificWorker::RCISMousePicker_setPick(Pick myPick)
+	catch (const Ice::Exception &ex)
 	{
-		//subscribesToCODE
-		auto [x, y, z, name] = myPick.ice_tuple();
-		target.activo = true;
-		target.write(x, z);
-		std::cout << "Coordenades " << x << " - " << y << " - " << z << name << std::endl;
+		std::cout << ex << std::endl;
 	}
+
+	//RoboCompGenericBase::TBaseState bState;
+	//differentialrobot_proxy->getBaseState( bState);
+}
+
+void SpecificWorker::RCISMousePicker_setPick(Pick myPick)
+{
+	//subscribesToCODE
+	auto [x, y, z, name] = myPick.ice_tuple();
+	target.activo = true;
+	target.write(x, z);
+	std::cout << "Coordenades " << x << " - " << y << " - " << z << name << std::endl;
+}

@@ -68,8 +68,8 @@ private:
 	RoboCompGenericBase::TBaseState pos_robot;
 	float alfa;
 	enum class State{CHOQUE,GIRO_ROT,AVANZAR_BACK,AVANZAR,AVANZAR_FRONT,IDLE, ORIENTAR};
-	State currentState = State::IDLE;
-	
+	State currentState = State::IDLE;	
+	float A,B,C;
 };
 
 #endif
