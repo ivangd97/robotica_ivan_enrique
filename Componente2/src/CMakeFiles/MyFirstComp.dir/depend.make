@@ -246,6 +246,7 @@ src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/
 src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/include/qt4/QtGui/QMatrix4x4
 src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/include/qt4/QtGui/QPalette
 src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/include/qt4/QtGui/QPlatformWindow
+src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/include/qt4/QtGui/QPolygon
 src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/include/qt4/QtGui/QPrinter
 src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/include/qt4/QtGui/QTransform
 src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o: /usr/include/qt4/QtGui/QVector3D
@@ -2459,6 +2460,7 @@ src/CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/qt4/QtGui/QLayout
 src/CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/qt4/QtGui/QMatrix4x4
 src/CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/qt4/QtGui/QPalette
 src/CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/qt4/QtGui/QPlatformWindow
+src/CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/qt4/QtGui/QPolygon
 src/CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/qt4/QtGui/QPrinter
 src/CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/qt4/QtGui/QTransform
 src/CMakeFiles/MyFirstComp.dir/main.cpp.o: /usr/include/qt4/QtGui/QVector3D
@@ -3803,6 +3805,7 @@ src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/QLay
 src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/QMatrix4x4
 src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/QPalette
 src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/QPlatformWindow
+src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/QPolygon
 src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/QPrinter
 src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/QTransform
 src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o: /usr/include/qt4/QtGui/QVector3D

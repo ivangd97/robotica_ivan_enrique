@@ -58,73 +58,16 @@ void SpecificWorker::initialize(int period)
 
 void SpecificWorker::compute()
 {
-	const float threshold = 350; // millimeters
-	float rot = 0.8;			 // rads per second
 	try
 	{
 		RoboCompGenericBase::TBaseState bState;
 		// read laser data
 		RoboCompLaser::TLaserData ldata = laser_proxy->getLaserData();
-		differentialrobot_proxy->getBaseState(bSta
-		te);
+		differentialrobot_proxy->getBaseState(bState);
 		innerModel->updateTransformValues("base", bState.x, 0, bState.z, 0, bState.alpha, 0);
 		//sort laser data from small to large distances using a lambda function.
 		//std::sort(ldata.begin(), ldata.end(), [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
 		//this state detec if there is a wall
-
-		if (target.activo)
-		{
-			currentState = State::IDLE;
-			cont++;
-		}
-		else
-		{
-			if (cont < 1)
-			{
-				currentState = State::PARAR;
-			}
-			else
-			{
-
-				if (currentState == State::ORIENTAR)
-				{
-					currentState = State::ORIENTAR;
-				}
-				else
-				{
-					if (ldata.front().angle >= 1.65 && ldata.front().angle <= 1.48 && currentState == State::AVANZAR_BACK)
-					{
-						currentState = State::AVANZAR;
-					}
-					//this state is there are any object close
-					if (ldata.front().dist < 600)
-					{
-						if (currentState == State::CHOQUE)
-						{
-							currentState = State::AVANZAR_FRONT;
-						}
-						currentState = State::GIRO_ROT;
-					}
-					else
-					{
-						//in this state if the distance if bigger than 600 the robot move
-						if (ldata.front().dist < 1000 && currentState != State::CHOQUE)
-						{
-							currentState = State::AVANZAR_BACK;
-						}
-						else
-						{
-							currentState = State::AVANZAR;
-						}
-					}
-				}
-			}
-
-			if (ldata.front().dist < threshold)
-			{
-				currentState = State::CHOQUE;
-			}
-		}
 		switch (currentState)
 		{
 		case State::CHOQUE:
@@ -163,36 +106,22 @@ void SpecificWorker::compute()
 				pos_robot = bState;
 				target.activo = false;
 			}
-			
+			break;
+
 		//case ORIENTAR
 		case State::ORIENTAR:
 			std::cout << "ORIENTAR" << std::endl;
 			{
-				//QVec p = innermodel->transform("robot", QVec::vec3( t.x, 0, t.z), "world");
-				std::tuple<float, float> pos = target.read();
-				QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
-				alfa = atan2(tr.x(), tr.z());
-
-				if (( tr.x()-bState.x < 50) && ( tr.x()-bState.x  > -50 )&&
-				( tr.z()-bState.z < 50 )&& (tr.z()-bState.z > -50))
-				{
-					std::cout << "entrando en parar" << std::endl;
-					currentState = State::PARAR;
-					cont = 0;
-					break;
-				}
-				//no avanza pero gira la cantidad alfa
-				differentialrobot_proxy->setSpeedBase(0, alfa);
-				if (fabs(alfa) < 0.1)
-				{
-					differentialrobot_proxy->setSpeedBase(800, 0);
-				}
-
+				gotoTarget(ldata);
 				break;
 			}
 		case State::PARAR:
 			std::cout << "PARAR" << std::endl;
 			differentialrobot_proxy->setSpeedBase(0, 0);
+			break;
+		case State::BUG:
+			std::cout << "BUG" << std::endl;
+			bichote();
 			break;
 		default:
 			std::cout << "DEFAULT" << std::endl;
@@ -204,9 +133,84 @@ void SpecificWorker::compute()
 	{
 		std::cout << ex << std::endl;
 	}
+}
+void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
+{
+	std::tuple<float, float> pos = target.read();
+	QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
+	//float dist = tr.norm();
+	float A = tr.x() - bState.x;
+	float B = -(tr.z() - bState.z);
+	float C = -(B * bState.x) - (A * bState.z);
+	alfa = atan2(tr.x(), tr.z());
 
-	//RoboCompGenericBase::TBaseState bState;
-	//differentialrobot_proxy->getBaseState( bState);
+	if (obstacle(ldata))
+	{
+		currentState = State::BUG;
+		return;
+	}
+
+	if ((tr.x() - bState.x < 100) && (tr.x() - bState.x > -100) &&
+		(tr.z() - bState.z < 100) && (tr.z() - bState.z > -100))
+	{
+		std::cout << "entrando en parar" << std::endl;
+		currentState = State::PARAR;
+		target.activo = false;
+		return;
+	}
+	//no avanza pero gira la cantidad alfa
+	differentialrobot_proxy->setSpeedBase(0, alfa);
+	if (fabs(alfa) < 0.05)
+	{
+		differentialrobot_proxy->setSpeedBase(800, 0);
+	}
+}
+void SpecificWorker::bichote()
+{
+	if (ldata.front().angle >= 1.65 && ldata.front().angle <= 1.48 && currentState == State::AVANZAR_BACK)
+	{
+		currentState = State::AVANZAR;
+	}
+	//this state is there are any object close
+	if (ldata.front().dist < 600)
+	{
+		if (currentState == State::CHOQUE)
+		{
+			currentState = State::AVANZAR_FRONT;
+		}
+		currentState = State::GIRO_ROT;
+	}
+	else
+	{
+		//in this state if the distance if bigger than 600 the robot move
+		if (ldata.front().dist < 1000 && currentState != State::CHOQUE)
+		{
+			currentState = State::AVANZAR_BACK;
+		}
+		else
+		{
+			currentState = State::AVANZAR;
+		}
+	}
+
+	if (ldata.front().dist < threshold)
+	{
+		currentState = State::CHOQUE;
+	}
+}
+bool SpecificWorker::obstacle(const RoboCompLaser::TLaserData &ldata)
+{
+	auto ln = innerModel->getNode<InnerModelLaser>("laser");
+
+	std::tuple<float, float> pos = target.read();
+	QVec t = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
+	QPolygonF polygon;
+	for (const auto &; ldata)
+	{
+		auto v = ln->laserTo(std::string("world"), l->dist, l->angle);
+		polygon << QPointF(v.x(), v.z());
+	}
+	return polygon.containsPoint(QPointF(t.x(), t.z()), Qt::WindingFill);
 }
 
 void SpecificWorker::RCISMousePicker_setPick(Pick myPick)

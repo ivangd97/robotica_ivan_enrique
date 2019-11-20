@@ -321,6 +321,8 @@ genericworker.h
 -
 innermodel/innermodel.h
 -
+QPolygon
+-
 mutex
 -
 thread
@@ -2187,6 +2189,10 @@ qpalette.h
 /usr/include/qt4/QtGui/QPlatformWindow
 qplatformwindow_qpa.h
 /usr/include/qt4/QtGui/qplatformwindow_qpa.h
+
+/usr/include/qt4/QtGui/QPolygon
+qpolygon.h
+/usr/include/qt4/QtGui/qpolygon.h
 
 /usr/include/qt4/QtGui/QPrinter
 qprinter.h

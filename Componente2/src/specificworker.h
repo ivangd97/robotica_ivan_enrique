@@ -29,7 +29,7 @@
 
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
-
+#include<QPolygon>
 #include <mutex>
 #include <thread>
 #include <tuple>
@@ -41,6 +41,9 @@ public:
 	~SpecificWorker();
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
 	void RCISMousePicker_setPick(Pick myPick);
+	void gotoTarget(const RoboCompLaser::TLaserData &ldata);
+	void bichote();
+	bool obstacle(const RoboCompLaser::TLaserData &ldata);
 	struct buffer_locker{
 		std::mutex in_mutex;
 		void write(float x_,float z_){
@@ -67,8 +70,9 @@ private:
 	buffer_locker target;
 	RoboCompGenericBase::TBaseState pos_robot;
 	float alfa;
-	int cont=0;
-	enum class State{CHOQUE,GIRO_ROT,AVANZAR_BACK,AVANZAR,AVANZAR_FRONT,IDLE, ORIENTAR,PARAR};
+	const float threshold = 350; // millimeters
+	float rot = 0.8;			 // rads per second
+	enum class State{CHOQUE,GIRO_ROT,AVANZAR_BACK,AVANZAR,AVANZAR_FRONT,IDLE, ORIENTAR,PARAR,BUG};
 	State currentState = State::IDLE;	
 	//float A,B,C;
 };

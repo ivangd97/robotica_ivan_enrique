@@ -247,6 +247,7 @@ src/CMakeFiles/MyFirstComp.dir/MyFirstComp_autogen/mocs_compilation.cpp.o
  /usr/include/qt4/QtGui/QMatrix4x4
  /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPlatformWindow
+ /usr/include/qt4/QtGui/QPolygon
  /usr/include/qt4/QtGui/QPrinter
  /usr/include/qt4/QtGui/QTransform
  /usr/include/qt4/QtGui/QVector3D
@@ -2460,6 +2461,7 @@ src/CMakeFiles/MyFirstComp.dir/main.cpp.o
  /usr/include/qt4/QtGui/QMatrix4x4
  /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPlatformWindow
+ /usr/include/qt4/QtGui/QPolygon
  /usr/include/qt4/QtGui/QPrinter
  /usr/include/qt4/QtGui/QTransform
  /usr/include/qt4/QtGui/QVector3D
@@ -3804,6 +3806,7 @@ src/CMakeFiles/MyFirstComp.dir/specificworker.cpp.o
  /usr/include/qt4/QtGui/QMatrix4x4
  /usr/include/qt4/QtGui/QPalette
  /usr/include/qt4/QtGui/QPlatformWindow
+ /usr/include/qt4/QtGui/QPolygon
  /usr/include/qt4/QtGui/QPrinter
  /usr/include/qt4/QtGui/QTransform
  /usr/include/qt4/QtGui/QVector3D
