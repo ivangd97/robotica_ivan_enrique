@@ -117,11 +117,22 @@ void SpecificWorker::compute()
 			}
 		case State::PARAR:
 			std::cout << "PARAR" << std::endl;
+			if (target.activo == true)
+			{
+				currentState = State::IDLE;
+			}
 			differentialrobot_proxy->setSpeedBase(0, 0);
 			break;
 		case State::BUG:
 			std::cout << "BUG" << std::endl;
-			bichote();
+			if (targetVisible() == false)
+			{
+				bichote();
+			}
+			else
+			{
+				currentState = State::ORIENTAR;
+			}
 			break;
 		default:
 			std::cout << "DEFAULT" << std::endl;
@@ -144,14 +155,10 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 	float C = -(B * bState.x) - (A * bState.z);
 	alfa = atan2(tr.x(), tr.z());
 
-	if (obstacle(ldata))
-	{
-		currentState = State::BUG;
-		return;
-	}
+	if (ldata.front().dist < threshold)
+		obstacle();
 
-	if ((tr.x() - bState.x < 100) && (tr.x() - bState.x > -100) &&
-		(tr.z() - bState.z < 100) && (tr.z() - bState.z > -100))
+	if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
 	{
 		std::cout << "entrando en parar" << std::endl;
 		currentState = State::PARAR;
@@ -162,7 +169,7 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 	differentialrobot_proxy->setSpeedBase(0, alfa);
 	if (fabs(alfa) < 0.05)
 	{
-		differentialrobot_proxy->setSpeedBase(800, 0);
+		differentialrobot_proxy->setSpeedBase(400, 0);
 	}
 }
 void SpecificWorker::bichote()
@@ -170,6 +177,7 @@ void SpecificWorker::bichote()
 	if (ldata.front().angle >= 1.65 && ldata.front().angle <= 1.48 && currentState == State::AVANZAR_BACK)
 	{
 		currentState = State::AVANZAR;
+		return;
 	}
 	//this state is there are any object close
 	if (ldata.front().dist < 600)
@@ -198,19 +206,55 @@ void SpecificWorker::bichote()
 		currentState = State::CHOQUE;
 	}
 }
-bool SpecificWorker::obstacle(const RoboCompLaser::TLaserData &ldata)
-{
-	auto ln = innerModel->getNode<InnerModelLaser>("laser");
 
-	std::tuple<float, float> pos = target.read();
-	QVec t = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
-	QPolygonF polygon;
-	for (const auto &; ldata)
+void SpecificWorker::obstacle()
+{
+	std::cout << "entrando en OBSTACLE" << std::endl;
+	QVec tr;
+	float dist;
+	tr = innerModel->transform("base", QVec::vec3(target.x, 0, target.z), "world");
+	dist = tr.norm2(); //Aquí obtenemos el tamaño del vector
+    std::cout << "calculado dist: "<< dist << std::endl;
+	if (dist < 100)
 	{
-		auto v = ln->laserTo(std::string("world"), l->dist, l->angle);
-		polygon << QPointF(v.x(), v.z());
+		std::cout << "distancia menor que 100" << std::endl;
+		currentState = State::IDLE;
+		differentialrobot_proxy->setSpeedBase(0, 0);
+		return;
 	}
-	return polygon.containsPoint(QPointF(t.x(), t.z()), Qt::WindingFill);
+
+	if (target.activo)
+	{
+		std::cout << "target sigue activo" << std::endl;
+		currentState = State::IDLE;
+		differentialrobot_proxy->setSpeedBase(0, 0);
+		return;
+	}
+    std::sort(ldata.begin(), ldata.end(), [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
+	if (ldata.front().dist <= threshold)
+	{
+		std::cout << "yendo a bug" << std::endl;
+		currentState = State::BUG;
+		//differentialrobot_proxy->setSpeedBase(0, 0);
+		return;
+	}
+	//differentialrobot_proxy->setSpeedBase(0, 0.5);
+}
+
+bool SpecificWorker::targetVisible()
+{
+	std::cout << "entrando en target visible" << std::endl;
+	QPolygonF polygon;
+	auto laser = innerModel->getNode<InnerModelLaser>(std::string("laser"));
+	for (int i; i < 180; i++)
+	{
+		QVec lr = laser->laserTo(std::string("world"), ldata[i].dist, ldata[i].angle);
+		polygon << QPointF(lr.x(), lr.z());
+	}
+	QVec tr = QVec::vec3(target.x, 0, target.z);
+	std::cout << "X : " << target.x << " Y : " << target.z << std::endl;
+
+	return polygon.containsPoint(QPointF(tr.x(), tr.z()), Qt::WindingFill);
 }
 
 void SpecificWorker::RCISMousePicker_setPick(Pick myPick)

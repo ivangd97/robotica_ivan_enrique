@@ -43,7 +43,8 @@ public:
 	void RCISMousePicker_setPick(Pick myPick);
 	void gotoTarget(const RoboCompLaser::TLaserData &ldata);
 	void bichote();
-	bool obstacle(const RoboCompLaser::TLaserData &ldata);
+	void obstacle();
+	bool targetVisible();
 	struct buffer_locker{
 		std::mutex in_mutex;
 		void write(float x_,float z_){
@@ -54,6 +55,9 @@ public:
 		std::tuple<float,float> read(){
 			std::lock_guard<std::mutex>lock(in_mutex);
     		return std::make_tuple(x,z);
+		}
+		void setVectorModule(float distance){
+			
 		}
 		float x,z;
 		bool activo=false;
