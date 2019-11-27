@@ -102,6 +102,7 @@ void SpecificWorker::compute()
 			//levamos al robot a ORIENTAR
 			if (target.activo == true)
 			{
+				std::cout << "target activo" << std::endl;
 				currentState = State::ORIENTAR;
 				pos_robot = bState;
 				target.activo = false;
@@ -125,9 +126,10 @@ void SpecificWorker::compute()
 			break;
 		case State::BUG:
 			std::cout << "BUG" << std::endl;
-			if (targetVisible() == false)
+			if (targetVisible(ldata) == false)
 			{
-				bichote();
+				std::cout << "entrando en bichote" << std::endl;
+				bichote(ldata);
 			}
 			else
 			{
@@ -156,7 +158,10 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 	alfa = atan2(tr.x(), tr.z());
 
 	if (ldata.front().dist < threshold)
-		obstacle();
+	{
+		obstacle(tr);
+		return;
+	}
 
 	if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
 	{
@@ -169,53 +174,32 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 	differentialrobot_proxy->setSpeedBase(0, alfa);
 	if (fabs(alfa) < 0.05)
 	{
-		differentialrobot_proxy->setSpeedBase(400, 0);
+		differentialrobot_proxy->setSpeedBase(200, 0);
 	}
 }
-void SpecificWorker::bichote()
+void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
 {
-	if (ldata.front().angle >= 1.65 && ldata.front().angle <= 1.48 && currentState == State::AVANZAR_BACK)
-	{
-		currentState = State::AVANZAR;
-		return;
-	}
-	//this state is there are any object close
-	if (ldata.front().dist < 600)
-	{
-		if (currentState == State::CHOQUE)
-		{
-			currentState = State::AVANZAR_FRONT;
-		}
-		currentState = State::GIRO_ROT;
-	}
-	else
-	{
-		//in this state if the distance if bigger than 600 the robot move
-		if (ldata.front().dist < 1000 && currentState != State::CHOQUE)
-		{
-			currentState = State::AVANZAR_BACK;
-		}
-		else
-		{
-			currentState = State::AVANZAR;
-		}
-	}
 
 	if (ldata.front().dist < threshold)
 	{
-		currentState = State::CHOQUE;
+		std::cout << "CHOQUE" << std::endl;
+		std::cout << ldata.front().dist << std::endl;
+		differentialrobot_proxy->setSpeedBase(60,ldata.back().angle);
+		currentState = State::BUG;
 	}
+        differentialrobot_proxy->setSpeedBase(100,0);
+        currentState = State::BUG;
 }
 
-void SpecificWorker::obstacle()
+void SpecificWorker::obstacle(QVec tr)
 {
 	std::cout << "entrando en OBSTACLE" << std::endl;
-	QVec tr;
+	//QVec tr;
 	float dist;
-	tr = innerModel->transform("base", QVec::vec3(target.x, 0, target.z), "world");
+	//tr = innerModel->transform("base", QVec::vec3(target.x, 0, target.z), "world");
 	dist = tr.norm2(); //Aquí obtenemos el tamaño del vector
-    std::cout << "calculado dist: "<< dist << std::endl;
-	if (dist < 100)
+	std::cout << "calculado dist: " << dist << std::endl;
+	/*if (ldata.front().dist < 100)
 	{
 		std::cout << "distancia menor que 100" << std::endl;
 		currentState = State::IDLE;
@@ -229,24 +213,21 @@ void SpecificWorker::obstacle()
 		currentState = State::IDLE;
 		differentialrobot_proxy->setSpeedBase(0, 0);
 		return;
-	}
-    std::sort(ldata.begin(), ldata.end(), [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
-	if (ldata.front().dist <= threshold)
-	{
-		std::cout << "yendo a bug" << std::endl;
-		currentState = State::BUG;
-		//differentialrobot_proxy->setSpeedBase(0, 0);
-		return;
-	}
-	//differentialrobot_proxy->setSpeedBase(0, 0.5);
+	}*/
+	std::sort(ldata.begin(), ldata.end(), [](RoboCompLaser::TData a, RoboCompLaser::TData b) { return a.dist < b.dist; });
+	std::cout << "hecho sort" << std::endl;
+	std::cout << "yendo a bug" << std::endl;
+	currentState = State::BUG;
+	//differentialrobot_proxy->setSpeedBase(0, 0);
+	return;
 }
 
-bool SpecificWorker::targetVisible()
+bool SpecificWorker::targetVisible(const RoboCompLaser::TLaserData &ldata)
 {
 	std::cout << "entrando en target visible" << std::endl;
 	QPolygonF polygon;
 	auto laser = innerModel->getNode<InnerModelLaser>(std::string("laser"));
-	for (int i; i < 180; i++)
+	for (int i; i < 60; i++)
 	{
 		QVec lr = laser->laserTo(std::string("world"), ldata[i].dist, ldata[i].angle);
 		polygon << QPointF(lr.x(), lr.z());

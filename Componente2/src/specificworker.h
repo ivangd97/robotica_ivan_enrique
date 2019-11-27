@@ -42,9 +42,9 @@ public:
 	bool setParams(RoboCompCommonBehavior::ParameterList params);
 	void RCISMousePicker_setPick(Pick myPick);
 	void gotoTarget(const RoboCompLaser::TLaserData &ldata);
-	void bichote();
-	void obstacle();
-	bool targetVisible();
+	void bichote(const RoboCompLaser::TLaserData &ldata);
+	void obstacle(QVec tr);
+	bool targetVisible(const RoboCompLaser::TLaserData &ldata);
 	struct buffer_locker{
 		std::mutex in_mutex;
 		void write(float x_,float z_){
@@ -56,9 +56,7 @@ public:
 			std::lock_guard<std::mutex>lock(in_mutex);
     		return std::make_tuple(x,z);
 		}
-		void setVectorModule(float distance){
-			
-		}
+		
 		float x,z;
 		bool activo=false;
     };
