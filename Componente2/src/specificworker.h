@@ -44,7 +44,8 @@ public:
 	void gotoTarget(const RoboCompLaser::TLaserData &ldata);
 	void bichote(const RoboCompLaser::TLaserData &ldata);
 	void obstacle(QVec tr);
-	bool targetVisible(const RoboCompLaser::TLaserData &ldata);
+	bool targetVisible();
+	bool wall();
 	struct buffer_locker{
 		std::mutex in_mutex;
 		void write(float x_,float z_){
@@ -59,6 +60,7 @@ public:
 		
 		float x,z;
 		bool activo=false;
+		
     };
 
 public slots:
@@ -71,8 +73,11 @@ private:
 	RoboCompLaser::TLaserData ldata;
 	buffer_locker target;
 	RoboCompGenericBase::TBaseState pos_robot;
+	float A,B,C;
 	float alfa;
-	const float threshold = 350; // millimeters
+	bool turn=false;
+	float distInicio = 0;
+	const float threshold =300; // millimeters
 	float rot = 0.8;			 // rads per second
 	enum class State{CHOQUE,GIRO_ROT,AVANZAR_BACK,AVANZAR,AVANZAR_FRONT,IDLE, ORIENTAR,PARAR,BUG};
 	State currentState = State::IDLE;	
