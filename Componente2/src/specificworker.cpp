@@ -130,7 +130,6 @@ void SpecificWorker::compute()
 			std::cout << "BUG" << std::endl;
 			if (targetVisible() == false)
 			{
-				std::cout << "entrando en bichote" << std::endl;
 				bichote(ldata);
 			}
 			else
@@ -161,11 +160,12 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 	if (distInicio == 0)
 	{
 		distInicio = sqrt(pow(A, 2.0) + pow(-B, 2.0));
+		std::cout << "Distancia inicial al punto: " << distInicio << std::endl;
 	}
 	float distAUX = sqrt(pow(A, 2.0) + pow(-B, 2.0));
-	std::cout << "Distancia inicial al punto: " << distAUX << std::endl;
 	if (ldata.front().dist < threshold)
 	{
+		differentialrobot_proxy->setSpeedBase(0, 0);
 		obstacle(tr);
 		return;
 	}
@@ -201,7 +201,7 @@ void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
 	//float C2 = -(B2 * bState.x) - (A2 * bState.z);
 	float distActual = sqrt(pow(A2, 2.0) + pow(-B2, 2.0));
 
-	if (distActual < distInicio && ((A * bState.x) + (B * bState.z) + C == 0 && targetVisible()))
+	if (distActual < distInicio && (((A * bState.x) + (B * bState.z) + C) == 0 && targetVisible()))
 	{
 		std::cout << "YENDO A PUNTO DESDE BICHO" << std::endl;
 		currentState = State::ORIENTAR;
@@ -209,8 +209,8 @@ void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
 	else
 	{
 		std::cout << "RODEAR" << std::endl;
-		differentialrobot_proxy->setSpeedBase(5, rot*ldata.front().angle);
-		if(ldata.front().dist<threshold){
+		differentialrobot_proxy->setSpeedBase(0, rot);
+		if(ldata.front().dist < threshold){
 			currentState = State::BUG;
 		}
 		currentState = State::AVANZAR;
@@ -226,6 +226,7 @@ void SpecificWorker::obstacle(QVec tr)
 	}
 	else
 	{
+		differentialrobot_proxy->setSpeedBase(0, 0);
 		currentState = State::AVANZAR;
 	}
 	return;
