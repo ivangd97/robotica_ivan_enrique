@@ -44,8 +44,15 @@ public:
 	void gotoTarget(const RoboCompLaser::TLaserData &ldata);
 	void bichote(const RoboCompLaser::TLaserData &ldata);
 	void obstacle(QVec tr);
-	bool targetVisible();
 	bool wall();
+	bool targetVisible();
+	//Nuevos metodos para entrega 3
+	/*void GotoPoint_go(string nodo, float x, float y, float alpha);
+	void GotoPoint_turn(float speed);
+	bool GotoPoint_atTarget();
+	void GotoPoint_stop();*/
+	
+	
 	struct buffer_locker{
 		std::mutex in_mutex;
 		void write(float x_,float z_){
@@ -76,8 +83,9 @@ private:
 	float A,B,C;
 	float alfa;
 	bool turn=false;
+	bool visto=true;
 	float distInicio = 0;
-	const float threshold =300; // millimeters
+	const float threshold =500; // millimeters
 	float rot = 0.8;			 // rads per second
 	enum class State{CHOQUE,GIRO_ROT,AVANZAR_BACK,AVANZAR,AVANZAR_FRONT,IDLE, ORIENTAR,PARAR,BUG};
 	State currentState = State::IDLE;	

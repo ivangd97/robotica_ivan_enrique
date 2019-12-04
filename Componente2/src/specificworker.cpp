@@ -73,7 +73,7 @@ void SpecificWorker::compute()
 		case State::CHOQUE:
 			std::cout << "CHOQUE" << std::endl;
 			std::cout << ldata.front().dist << std::endl;
-			differentialrobot_proxy->setSpeedBase(5, -rot);
+			differentialrobot_proxy->setSpeedBase(5, -rot*2);
 			break;
 		case State::GIRO_ROT:
 			std::cout << "GIRO_ROT" << std::endl;
@@ -87,14 +87,14 @@ void SpecificWorker::compute()
 		//case AVANZAR
 		case State::AVANZAR:
 			std::cout << "AVANZAR" << std::endl;
-			differentialrobot_proxy->setSpeedBase(300, 0);
+			differentialrobot_proxy->setSpeedBase(200, 0);
 			currentState = State::ORIENTAR;
 			target.activo = true;
 			break;
 		case State::AVANZAR_FRONT:
 			std::cout << "AVANZAR_FRONT" << std::endl;
 			differentialrobot_proxy->setSpeedBase(5, ldata.front().angle);
-			differentialrobot_proxy->setSpeedBase(850, 0);
+			differentialrobot_proxy->setSpeedBase(500, 0);
 			break;
 		//comenzamos estados IDLE,ORIENTAR_BEGIN,ORIENTAR para esperar click
 		//case IDLE
@@ -163,9 +163,9 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 		std::cout << "Distancia inicial al punto: " << distInicio << std::endl;
 	}
 	float distAUX = sqrt(pow(A, 2.0) + pow(-B, 2.0));
-	if (ldata.front().dist < threshold)
+	if (ldata.front().dist < threshold || ldata[sizeof(ldata)/2].dist< threshold )
 	{
-		differentialrobot_proxy->setSpeedBase(0, 0);
+		differentialrobot_proxy->setSpeedBase(0, 6*rot);
 		obstacle(tr);
 		return;
 	}
@@ -178,19 +178,26 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 		return;
 	}
 	//no avanza pero gira la cantidad alfa
+	if(visto){
 	differentialrobot_proxy->setSpeedBase(0, alfa);
+	}
+	
 	if (fabs(alfa) < 0.05 )
 	{
 
-		if (ldata.front().dist < 800)
-		{
-			differentialrobot_proxy->setSpeedBase(0.35*ldata.front().dist, 0);
+		if (ldata.front().dist < 600||ldata.front().dist>100)
+		{   
+			differentialrobot_proxy->setSpeedBase(200,0);
 		}
 		else
 		{
-			differentialrobot_proxy->setSpeedBase(0.25*distAUX, 0);
+			if(ldata.back().dist<600||ldata.back().dist>100){
+             	differentialrobot_proxy->setSpeedBase(200,0);
+			}
+			differentialrobot_proxy->setSpeedBase(200,0);
 		}
 	}
+	visto=targetVisible();
 }
 void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
 {
@@ -254,3 +261,23 @@ void SpecificWorker::RCISMousePicker_setPick(Pick myPick)
 	target.write(x, z);
 	std::cout << "Coordenades " << x << " - " << y << " - " << z << name << std::endl;
 }
+//Implementacion de metodos entrega 3
+/*void SpecificWorker::GotoPoint_go(string nodo, float x, float y, float alpha)
+{
+
+}
+
+void SpecificWorker::GotoPoint_turn(float speed)
+{
+//implementCODE
+}
+
+bool SpecificWorker::GotoPoint_atTarget()
+{
+//implementCODE
+}
+
+void SpecificWorker::GotoPoint_stop()
+{
+//implementCODE
+}*/
