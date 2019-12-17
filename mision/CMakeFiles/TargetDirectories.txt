@@ -1,0 +1,14 @@
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/src/CMakeFiles/install/strip.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/src/CMakeFiles/edit_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/src/CMakeFiles/intel.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/src/CMakeFiles/rebuild_cache.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/src/CMakeFiles/list_install_components.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/src/CMakeFiles/install/local.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/src/CMakeFiles/install.dir
+/home/salabeta/robocomp/components/robotica_ivan_enrique/mision/src/CMakeFiles/intel_autogen.dir
