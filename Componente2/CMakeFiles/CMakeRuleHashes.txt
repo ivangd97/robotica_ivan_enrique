@@ -3,5 +3,6 @@
 f017d23d88362261080ae5a55a27e133 src/CommonBehavior.cpp
 221f4955b2406f94180c38663e67803d src/DifferentialRobot.cpp
 cf77ed0ecdb8236e730ea4f3645c5f15 src/GenericBase.cpp
+ac1578da253ee4e9d1abe887942c0b31 src/GotoPoint.cpp
 f14b12aadac7ca2d1a3a1a79650e857f src/Laser.cpp
 83a79e99f071f9c41a5ccff79fd6c663 src/RCISMousePicker.cpp

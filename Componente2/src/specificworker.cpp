@@ -262,22 +262,26 @@ void SpecificWorker::RCISMousePicker_setPick(Pick myPick)
 	std::cout << "Coordenades " << x << " - " << y << " - " << z << name << std::endl;
 }
 //Implementacion de metodos entrega 3
-/*void SpecificWorker::GotoPoint_go(string nodo, float x, float y, float alpha)
+void SpecificWorker::GotoPoint_go(string nodo, float x, float y, float alpha)
 {
-
+	target.write(x,y);
+	gotoTarget(ldata);
 }
 
 void SpecificWorker::GotoPoint_turn(float speed)
 {
 //implementCODE
+ differentialrobot_proxy->setSpeedBase(speed,rot);
 }
 
 bool SpecificWorker::GotoPoint_atTarget()
 {
 //implementCODE
+ return false;
 }
 
 void SpecificWorker::GotoPoint_stop()
 {
 //implementCODE
-}*/
+ differentialrobot_proxy->setSpeedBase(0,0);
+}

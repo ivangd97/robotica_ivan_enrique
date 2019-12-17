@@ -47,10 +47,10 @@ public:
 	bool wall();
 	bool targetVisible();
 	//Nuevos metodos para entrega 3
-	/*void GotoPoint_go(string nodo, float x, float y, float alpha);
+	void GotoPoint_go(string nodo, float x, float y, float alpha);
 	void GotoPoint_turn(float speed);
 	bool GotoPoint_atTarget();
-	void GotoPoint_stop();*/
+	void GotoPoint_stop();
 	
 	
 	struct buffer_locker{
