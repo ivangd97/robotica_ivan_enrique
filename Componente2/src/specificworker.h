@@ -29,7 +29,7 @@
 
 #include <genericworker.h>
 #include <innermodel/innermodel.h>
-#include<QPolygon>
+#include <QPolygon>
 #include <mutex>
 #include <thread>
 #include <tuple>
@@ -82,10 +82,10 @@ private:
 	RoboCompGenericBase::TBaseState pos_robot;
 	float A,B,C;
 	float alfa;
-	bool turn=false;
-	bool visto=true;
+	bool turn = false;
+	bool visto = true;
 	float distInicio = 0;
-	const float threshold =500; // millimeters
+	const float threshold = 300; // millimeters
 	float rot = 0.8;			 // rads per second
 	enum class State{CHOQUE,GIRO_ROT,AVANZAR_BACK,AVANZAR,AVANZAR_FRONT,IDLE, ORIENTAR,PARAR,BUG};
 	State currentState = State::IDLE;	
