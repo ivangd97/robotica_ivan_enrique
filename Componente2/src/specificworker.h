@@ -43,6 +43,7 @@ public:
 	void RCISMousePicker_setPick(Pick myPick);
 	void gotoTarget(const RoboCompLaser::TLaserData &ldata);
 	void bichote(const RoboCompLaser::TLaserData &ldata);
+	void orientarNoVisible(const RoboCompLaser::TLaserData &ldata);
 	void obstacle(QVec tr);
 	bool wall();
 	bool targetVisible();
@@ -82,8 +83,9 @@ private:
 	RoboCompGenericBase::TBaseState pos_robot;
 	float A,B,C;
 	float alfa;
-	bool turn = false;
+	bool turn = true;
 	bool visto = true;
+	bool bandera=false;
 	float distInicio = 0;
 	const float threshold = 300; // millimeters
 	float rot = 0.8;			 // rads per second

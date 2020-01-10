@@ -113,10 +113,9 @@ void SpecificWorker::compute()
 		//case ORIENTAR
 		case State::ORIENTAR:
 			std::cout << "ORIENTAR" << std::endl;
-			{
-				gotoTarget(ldata);
-				break;
-			}
+			gotoTarget(ldata);
+			break;
+			
 		case State::PARAR:
 			std::cout << "PARAR" << std::endl;
 			distInicio = 0;
@@ -128,15 +127,7 @@ void SpecificWorker::compute()
 			break;
 		case State::BUG:
 			std::cout << "BUG" << std::endl;
-			if (targetVisible() == false)
-			{
-				bichote(ldata);
-			}
-			else
-			{
-				std::cout << "P" << std::endl;
-				currentState = State::ORIENTAR;
-			}
+			bichote(ldata);
 			break;
 		default:
 			std::cout << "DEFAULT" << std::endl;
@@ -164,7 +155,8 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 		std::cout << "Distancia inicial al punto: " << distInicio << std::endl;
 	}
 	float distAUX = sqrt(pow(A, 2.0) + pow(-B, 2.0));
-	if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
+    if(bandera==false){
+		if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
 	{
 		differentialrobot_proxy->setSpeedBase(0, 2 * rot);
 		obstacle(tr);
@@ -200,21 +192,87 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 		}
 	}
 	visto = targetVisible();
+	}
+
+	else{
+		if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
+	{
+		differentialrobot_proxy->setSpeedBase(0, 2 * rot);
+		obstacle(tr);
+		return;
+	}
+
+	if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
+	{
+		std::cout << "entrando en parar" << std::endl;
+		currentState = State::PARAR;
+		target.activo = false;
+		return;
+	}
+	//no avanza pero gira la cantidad alfa
+	if (!visto)
+	{
+		differentialrobot_proxy->setSpeedBase(0, -1.5);
+	}
+	if (fabs(alfa) < 0.05)
+	{
+
+		if (ldata.front().dist < 600 || ldata.front().dist > 100)
+		{
+			differentialrobot_proxy->setSpeedBase(200, 0);
+		}
+		else
+		{
+			if (ldata.back().dist < 600 || ldata.back().dist > 100)
+			{
+				differentialrobot_proxy->setSpeedBase(200, 0);
+			}
+			differentialrobot_proxy->setSpeedBase(200, 0);
+		}
+	}
+	visto = targetVisible();
+	if(targetVisible()){
+		bandera=false;
+	}
+	}
+	
 }
-void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
+void SpecificWorker::orientarNoVisible(const RoboCompLaser::TLaserData &ldata)
 {
 	std::tuple<float, float> pos = target.read();
 	QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
-	float A2 = tr.x() - bState.x;
-	float B2 = -(tr.z() - bState.z);
+	if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
+	{
+		if (ldata.front().dist < ldata.back().dist)
+		{
+			differentialrobot_proxy->setSpeedBase(0, ldata.front().angle);
+			obstacle(tr);
+			return;
+		}
+		else
+		{
+			differentialrobot_proxy->setSpeedBase(0, ldata.back().angle);
+			obstacle(tr);
+			return;
+		}
+	}
+}
+void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
+{
+	//std::tuple<float, float> pos = target.read();
+	//QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
+	//float A2 = tr.x() - bState.x;
+	//float B2 = -(tr.z() - bState.z);
 	//float C2 = -(B2 * bState.x) - (A2 * bState.z);
-	float distActual = sqrt(pow(A2, 2.0) + pow(-B2, 2.0));
+	//float distActual = sqrt(pow(A2, 2.0) + pow(-B2, 2.0));
 
 	std::cout << "RODEAR" << std::endl;
 	differentialrobot_proxy->setSpeedBase(0, rot);
 	if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
 	{
+		std::cout << "RODEAR 2" << std::endl;
 		currentState = State::BUG;
+		return;
 	}
 	currentState = State::AVANZAR;
 }
@@ -222,6 +280,7 @@ void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
 void SpecificWorker::obstacle(QVec tr)
 {
 	std::cout << "entrando en OBSTACLE" << std::endl;
+	bandera=true;
 	if (!targetVisible())
 	{
 		currentState = State::BUG;
