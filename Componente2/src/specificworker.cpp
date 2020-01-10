@@ -115,7 +115,7 @@ void SpecificWorker::compute()
 			std::cout << "ORIENTAR" << std::endl;
 			gotoTarget(ldata);
 			break;
-			
+
 		case State::PARAR:
 			std::cout << "PARAR" << std::endl;
 			distInicio = 0;
@@ -155,87 +155,91 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 		std::cout << "Distancia inicial al punto: " << distInicio << std::endl;
 	}
 	float distAUX = sqrt(pow(A, 2.0) + pow(-B, 2.0));
-    if(bandera==false){
+	if (bandera == false)
+	{
 		if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
-	{
-		differentialrobot_proxy->setSpeedBase(0, 2 * rot);
-		obstacle(tr);
-		return;
-	}
-
-	if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
-	{
-		std::cout << "entrando en parar" << std::endl;
-		currentState = State::PARAR;
-		target.activo = false;
-		return;
-	}
-	//no avanza pero gira la cantidad alfa
-	if (!visto)
-	{
-		differentialrobot_proxy->setSpeedBase(0, alfa);
-	}
-	if (fabs(alfa) < 0.05)
-	{
-
-		if (ldata.front().dist < 600 || ldata.front().dist > 100)
 		{
-			differentialrobot_proxy->setSpeedBase(200, 0);
+			differentialrobot_proxy->setSpeedBase(0, 2 * rot);
+			obstacle(tr);
+			return;
 		}
-		else
+
+		if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
 		{
-			if (ldata.back().dist < 600 || ldata.back().dist > 100)
+			std::cout << "entrando en parar" << std::endl;
+			currentState = State::PARAR;
+			bandera = false;
+			target.activo = false;
+			return;
+		}
+		//no avanza pero gira la cantidad alfa
+		if (!visto)
+		{
+			differentialrobot_proxy->setSpeedBase(0, alfa);
+		}
+		if (fabs(alfa) < 0.05)
+		{
+
+			if (ldata.front().dist < 600 || ldata.front().dist > 100)
 			{
 				differentialrobot_proxy->setSpeedBase(200, 0);
 			}
-			differentialrobot_proxy->setSpeedBase(200, 0);
+			else
+			{
+				if (ldata.back().dist < 600 || ldata.back().dist > 100)
+				{
+					differentialrobot_proxy->setSpeedBase(200, 0);
+				}
+				differentialrobot_proxy->setSpeedBase(200, 0);
+			}
 		}
-	}
-	visto = targetVisible();
+		visto = targetVisible();
 	}
 
-	else{
+	else
+	{
 		if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
-	{
-		differentialrobot_proxy->setSpeedBase(0, 2 * rot);
-		obstacle(tr);
-		return;
-	}
-
-	if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
-	{
-		std::cout << "entrando en parar" << std::endl;
-		currentState = State::PARAR;
-		target.activo = false;
-		return;
-	}
-	//no avanza pero gira la cantidad alfa
-	if (!visto)
-	{
-		differentialrobot_proxy->setSpeedBase(0, -1.5);
-	}
-	if (fabs(alfa) < 0.05)
-	{
-
-		if (ldata.front().dist < 600 || ldata.front().dist > 100)
 		{
-			differentialrobot_proxy->setSpeedBase(200, 0);
+			differentialrobot_proxy->setSpeedBase(0, 2 * rot);
+			obstacle(tr);
+			return;
 		}
-		else
+
+		if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
 		{
-			if (ldata.back().dist < 600 || ldata.back().dist > 100)
+			std::cout << "entrando en parar" << std::endl;
+			currentState = State::PARAR;
+			bandera = false;
+			target.activo = false;
+			return;
+		}
+		//no avanza pero gira la cantidad alfa
+		if (!visto)
+		{
+			differentialrobot_proxy->setSpeedBase(0, -1.5);
+		}
+		if (fabs(alfa) < 0.05)
+		{
+
+			if (ldata.front().dist < 600 || ldata.front().dist > 100)
 			{
 				differentialrobot_proxy->setSpeedBase(200, 0);
 			}
-			differentialrobot_proxy->setSpeedBase(200, 0);
+			else
+			{
+				if (ldata.back().dist < 600 || ldata.back().dist > 100)
+				{
+					differentialrobot_proxy->setSpeedBase(200, 0);
+				}
+				differentialrobot_proxy->setSpeedBase(200, 0);
+			}
+		}
+		visto = targetVisible();
+		if (targetVisible())
+		{
+			bandera = false;
 		}
 	}
-	visto = targetVisible();
-	if(targetVisible()){
-		bandera=false;
-	}
-	}
-	
 }
 void SpecificWorker::orientarNoVisible(const RoboCompLaser::TLaserData &ldata)
 {
@@ -280,7 +284,7 @@ void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
 void SpecificWorker::obstacle(QVec tr)
 {
 	std::cout << "entrando en OBSTACLE" << std::endl;
-	bandera=true;
+	bandera = true;
 	if (!targetVisible())
 	{
 		currentState = State::BUG;
