@@ -144,7 +144,6 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 {
 	std::tuple<float, float> pos = target.read();
 	QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
-	//float dist = tr.norm();
 	A = tr.x() - bState.x;
 	B = -(tr.z() - bState.z);
 	C = -(B * bState.x) - (A * bState.z);
@@ -154,22 +153,21 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 		distInicio = sqrt(pow(A, 2.0) + pow(-B, 2.0));
 		std::cout << "Distancia inicial al punto: " << distInicio << std::endl;
 	}
-	float distAUX = sqrt(pow(A, 2.0) + pow(-B, 2.0));
+	//float distAUX = sqrt(pow(A, 2.0) + pow(-B, 2.0));
+	if (((A < 100) && (A > -100)) && ((B < 110) && (B > -100)))
+	{
+		std::cout << "entrando en parar" << std::endl;
+		currentState = State::PARAR;
+		bandera = false;
+		target.activo = false;
+		return;
+	}
 	if (bandera == false)
 	{
 		if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
 		{
 			differentialrobot_proxy->setSpeedBase(0, 2 * rot);
 			obstacle(tr);
-			return;
-		}
-
-		if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
-		{
-			std::cout << "entrando en parar" << std::endl;
-			currentState = State::PARAR;
-			bandera = false;
-			target.activo = false;
 			return;
 		}
 		//no avanza pero gira la cantidad alfa
@@ -186,10 +184,6 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 			}
 			else
 			{
-				if (ldata.back().dist < 600 || ldata.back().dist > 100)
-				{
-					differentialrobot_proxy->setSpeedBase(200, 0);
-				}
 				differentialrobot_proxy->setSpeedBase(200, 0);
 			}
 		}
@@ -198,19 +192,12 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 
 	else
 	{
+
 		if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
 		{
+			//Posible cambio de rotacion
 			differentialrobot_proxy->setSpeedBase(0, 2 * rot);
 			obstacle(tr);
-			return;
-		}
-
-		if (((A < 100) && (A > -100)) && ((B < 100) && (B > -100)))
-		{
-			std::cout << "entrando en parar" << std::endl;
-			currentState = State::PARAR;
-			bandera = false;
-			target.activo = false;
 			return;
 		}
 		//no avanza pero gira la cantidad alfa
@@ -227,10 +214,6 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 			}
 			else
 			{
-				if (ldata.back().dist < 600 || ldata.back().dist > 100)
-				{
-					differentialrobot_proxy->setSpeedBase(200, 0);
-				}
 				differentialrobot_proxy->setSpeedBase(200, 0);
 			}
 		}
@@ -241,34 +224,8 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 		}
 	}
 }
-void SpecificWorker::orientarNoVisible(const RoboCompLaser::TLaserData &ldata)
-{
-	std::tuple<float, float> pos = target.read();
-	QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
-	if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
-	{
-		if (ldata.front().dist < ldata.back().dist)
-		{
-			differentialrobot_proxy->setSpeedBase(0, ldata.front().angle);
-			obstacle(tr);
-			return;
-		}
-		else
-		{
-			differentialrobot_proxy->setSpeedBase(0, ldata.back().angle);
-			obstacle(tr);
-			return;
-		}
-	}
-}
 void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
 {
-	//std::tuple<float, float> pos = target.read();
-	//QVec tr = innerModel->transform("base", QVec::vec3(std::get<0>(pos), 0, std::get<1>(pos)), "world");
-	//float A2 = tr.x() - bState.x;
-	//float B2 = -(tr.z() - bState.z);
-	//float C2 = -(B2 * bState.x) - (A2 * bState.z);
-	//float distActual = sqrt(pow(A2, 2.0) + pow(-B2, 2.0));
 
 	std::cout << "RODEAR" << std::endl;
 	differentialrobot_proxy->setSpeedBase(0, rot);
@@ -291,6 +248,7 @@ void SpecificWorker::obstacle(QVec tr)
 	}
 	else
 	{
+		std::cout << "saliendo de OBSTACLE" << std::endl;
 		differentialrobot_proxy->setSpeedBase(0, 0);
 		currentState = State::AVANZAR;
 	}
