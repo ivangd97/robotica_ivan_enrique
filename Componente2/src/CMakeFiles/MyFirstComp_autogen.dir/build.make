@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2
+CMAKE_SOURCE_DIR = /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2
+CMAKE_BINARY_DIR = /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2
 
 # Utility rule file for MyFirstComp_autogen.
 
@@ -54,8 +54,8 @@ CMAKE_BINARY_DIR = /home/salabeta/robocomp/components/robotica_ivan_enrique/Comp
 include src/CMakeFiles/MyFirstComp_autogen.dir/progress.make
 
 src/CMakeFiles/MyFirstComp_autogen:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target MyFirstComp"
-	cd /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src && /usr/bin/cmake -E cmake_autogen /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/MyFirstComp_autogen.dir ""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target MyFirstComp"
+	cd /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src && /usr/bin/cmake -E cmake_autogen /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/MyFirstComp_autogen.dir ""
 
 MyFirstComp_autogen: src/CMakeFiles/MyFirstComp_autogen
 MyFirstComp_autogen: src/CMakeFiles/MyFirstComp_autogen.dir/build.make
@@ -68,10 +68,10 @@ src/CMakeFiles/MyFirstComp_autogen.dir/build: MyFirstComp_autogen
 .PHONY : src/CMakeFiles/MyFirstComp_autogen.dir/build
 
 src/CMakeFiles/MyFirstComp_autogen.dir/clean:
-	cd /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src && $(CMAKE_COMMAND) -P CMakeFiles/MyFirstComp_autogen.dir/cmake_clean.cmake
+	cd /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src && $(CMAKE_COMMAND) -P CMakeFiles/MyFirstComp_autogen.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/MyFirstComp_autogen.dir/clean
 
 src/CMakeFiles/MyFirstComp_autogen.dir/depend:
-	cd /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2 /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2 /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src /home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/MyFirstComp_autogen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2 /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2 /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src /home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/CMakeFiles/MyFirstComp_autogen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/MyFirstComp_autogen.dir/depend
 
