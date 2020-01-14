@@ -43,9 +43,7 @@ public:
 	void RCISMousePicker_setPick(Pick myPick);
 	void gotoTarget(const RoboCompLaser::TLaserData &ldata);
 	void bichote(const RoboCompLaser::TLaserData &ldata);
-	void orientarNoVisible(const RoboCompLaser::TLaserData &ldata);
 	void obstacle(QVec tr);
-	bool wall();
 	bool targetVisible();
 	//Nuevos metodos para entrega 3
 	void GotoPoint_go(string nodo, float x, float y, float alpha);
