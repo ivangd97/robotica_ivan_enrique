@@ -12,13 +12,13 @@ QObject
 signal.h
 -
 
-/home/salabeta/robocomp/classes/qlog/qlog.cpp
+/home/enrique/robocomp/classes/qlog/qlog.cpp
 qlog.h
-/home/salabeta/robocomp/classes/qlog/qlog.h
+/home/enrique/robocomp/classes/qlog/qlog.h
 
-/home/salabeta/robocomp/classes/qlog/qlog.h
+/home/enrique/robocomp/classes/qlog/qlog.h
 config.h
-/home/salabeta/robocomp/classes/qlog/config.h
+/home/enrique/robocomp/classes/qlog/config.h
 QtCore
 -
 iostream
@@ -30,11 +30,11 @@ boost/format.hpp
 boost/format.hpp
 -
 
-/home/salabeta/robocomp/classes/rapplication/rapplication.cpp
+/home/enrique/robocomp/classes/rapplication/rapplication.cpp
 rapplication.h
-/home/salabeta/robocomp/classes/rapplication/rapplication.h
+/home/enrique/robocomp/classes/rapplication/rapplication.h
 
-/home/salabeta/robocomp/classes/rapplication/rapplication.h
+/home/enrique/robocomp/classes/rapplication/rapplication.h
 Ice/Ice.h
 -
 Ice/Application.h
@@ -44,7 +44,7 @@ IceUtil/IceUtil.h
 QtCore
 -
 
-/home/salabeta/robocomp/classes/sigwatch/sigwatch.cpp
+/home/enrique/robocomp/classes/sigwatch/sigwatch.cpp
 sys/socket.h
 -
 unistd.h
@@ -58,17 +58,17 @@ QSocketNotifier
 QDebug
 -
 sigwatch.h
-/home/salabeta/robocomp/classes/sigwatch/sigwatch.h
+/home/enrique/robocomp/classes/sigwatch/sigwatch.h
 moc_sigwatch.cpp
-/home/salabeta/robocomp/classes/sigwatch/moc_sigwatch.cpp
+/home/enrique/robocomp/classes/sigwatch/moc_sigwatch.cpp
 
-/home/salabeta/robocomp/classes/sigwatch/sigwatch.h
+/home/enrique/robocomp/classes/sigwatch/sigwatch.h
 QObject
 -
 signal.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/CommonBehavior.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/CommonBehavior.cpp
 CommonBehavior.h
 -
 IceUtil/PushDisableWarnings.h
@@ -86,7 +86,7 @@ Ice/OutputStream.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/DifferentialRobot.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/DifferentialRobot.cpp
 DifferentialRobot.h
 -
 IceUtil/PushDisableWarnings.h
@@ -106,7 +106,7 @@ Ice/LocalException.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/GenericBase.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/GenericBase.cpp
 GenericBase.h
 -
 IceUtil/PushDisableWarnings.h
@@ -126,7 +126,7 @@ Ice/LocalException.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/GotoPoint.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/GotoPoint.cpp
 GotoPoint.h
 -
 IceUtil/PushDisableWarnings.h
@@ -144,7 +144,7 @@ Ice/OutputStream.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/Laser.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/Laser.cpp
 Laser.h
 -
 IceUtil/PushDisableWarnings.h
@@ -164,33 +164,33 @@ Ice/LocalException.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_genericmonitor.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_genericmonitor.cpp
 ../../genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_genericworker.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_genericworker.cpp
 ../../genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_specificmonitor.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_specificmonitor.cpp
 ../../specificmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_specificworker.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_specificworker.cpp
 ../../specificworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/mocs_compilation.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/mocs_compilation.cpp
 EWIEGA46WW/moc_genericmonitor.cpp
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_genericmonitor.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_genericmonitor.cpp
 EWIEGA46WW/moc_genericworker.cpp
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_genericworker.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_genericworker.cpp
 EWIEGA46WW/moc_specificmonitor.cpp
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_specificmonitor.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_specificmonitor.cpp
 EWIEGA46WW/moc_specificworker.cpp
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_specificworker.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/MyFirstComp_autogen/EWIEGA46WW/moc_specificworker.cpp
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/RCISMousePicker.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/RCISMousePicker.cpp
 RCISMousePicker.h
 -
 IceUtil/PushDisableWarnings.h
@@ -208,11 +208,11 @@ Ice/OutputStream.h
 IceUtil/PopDisableWarnings.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/commonbehaviorI.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/commonbehaviorI.cpp
 commonbehaviorI.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/commonbehaviorI.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/commonbehaviorI.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/commonbehaviorI.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/commonbehaviorI.h
 Ice/Ice.h
 -
 CommonBehavior.h
@@ -220,37 +220,37 @@ CommonBehavior.h
 config.h
 -
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
 genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/config.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/config.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.cpp
 genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
 Ice/Ice.h
 -
 QtCore
 -
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
 config.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/config.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/config.h
 qlog/qlog.h
 -
 CommonBehavior.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.cpp
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
 config.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/config.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/config.h
 stdint.h
 -
 qlog/qlog.h
@@ -274,11 +274,11 @@ Laser.h
 RCISMousePicker.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/gotopointI.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/gotopointI.cpp
 gotopointI.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/gotopointI.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/gotopointI.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/gotopointI.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/gotopointI.h
 Ice/Ice.h
 -
 GotoPoint.h
@@ -286,9 +286,9 @@ GotoPoint.h
 config.h
 -
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/main.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/main.cpp
 signal.h
 -
 QtCore
@@ -308,17 +308,17 @@ sigwatch/sigwatch.h
 qlog/qlog.h
 -
 config.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/config.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/config.h
 genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
 specificworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.h
 specificmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.h
 commonbehaviorI.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/commonbehaviorI.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/commonbehaviorI.h
 gotopointI.h
 -
 rcismousepickerI.h
@@ -326,11 +326,11 @@ rcismousepickerI.h
 GenericBase.h
 -
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/rcismousepickerI.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/rcismousepickerI.cpp
 rcismousepickerI.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/rcismousepickerI.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/rcismousepickerI.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/rcismousepickerI.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/rcismousepickerI.h
 Ice/Ice.h
 -
 RCISMousePicker.h
@@ -338,21 +338,21 @@ RCISMousePicker.h
 config.h
 -
 genericworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.cpp
 specificmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificmonitor.h
 genericmonitor.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/genericmonitor.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.cpp
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.cpp
 specificworker.h
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.h
 
-/home/salabeta/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.h
+/home/enrique/robocomp/components/robotica_ivan_enrique/Componente2/src/specificworker.h
 genericworker.h
 -
 innermodel/innermodel.h

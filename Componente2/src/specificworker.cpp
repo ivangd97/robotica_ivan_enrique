@@ -82,12 +82,12 @@ void SpecificWorker::compute()
 		case State::AVANZAR_BACK:
 			std::cout << "AVANZAR_BACK" << std::endl;
 			differentialrobot_proxy->setSpeedBase(5, ldata.back().angle);
-			differentialrobot_proxy->setSpeedBase(850, 0);
+			differentialrobot_proxy->setSpeedBase(8100, 0);
 			break;
 		//case AVANZAR
 		case State::AVANZAR:
 			std::cout << "AVANZAR" << std::endl;
-			differentialrobot_proxy->setSpeedBase(200, 0);
+			differentialrobot_proxy->setSpeedBase(520, 0);
 			currentState = State::ORIENTAR;
 			target.activo = true;
 			break;
@@ -127,6 +127,7 @@ void SpecificWorker::compute()
 			break;
 		case State::BUG:
 			std::cout << "BUG" << std::endl;
+			differentialrobot_proxy->setSpeedBase(150, 0);
 			bichote(ldata);
 			break;
 		default:
@@ -157,7 +158,7 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 	//float distAUX = sqrt(pow(A, 2.0) + pow(-B, 2.0));
 	if (bandera == false)
 	{
-		if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
+		if (ldata.front().dist < threshold + 50 || ldata[sizeof(ldata) / 2].dist < threshold   || ldata.back().dist < threshold  )
 		{
 			std::cout << "entrando en OBSTACLE desde bandera false" << std::endl;
 			differentialrobot_proxy->setSpeedBase(0, 2 * rot);
@@ -176,11 +177,12 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 		//no avanza pero gira la cantidad alfa
 		if (!visto && fabs(alfa) > 0.05)
 		{
+			std::cout << "-----------------Giro DE ORIENTACION" << std::endl;
 			differentialrobot_proxy->setSpeedBase(0, alfa);
 		}
 		if (fabs(alfa) < 0.05)
 		{
-			differentialrobot_proxy->setSpeedBase(200, 0);
+			differentialrobot_proxy->setSpeedBase(400, 0);
 			return;
 		}
 	}
@@ -189,13 +191,23 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 	{
 		if (!visto)
 		{
-			differentialrobot_proxy->setSpeedBase(0, -1.5);
+			if (ldata.front().dist < threshold  + 50 || ldata[sizeof(ldata) / 2].dist < threshold  || ldata.back().dist < threshold )
+			{
+				std::cout << "giro pequeño" << std::endl;
+
+				differentialrobot_proxy->setSpeedBase(0, -0.8);
+			}
+			else
+			{
+				std::cout << "giro GRANDE" << std::endl;
+				differentialrobot_proxy->setSpeedBase(0, -1.5);
+			}
 		}
 
-		if (ldata.front().dist < threshold+50 || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold+50)
+		if (ldata.front().dist < threshold + 50|| ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold )
 		{
 			std::cout << "entrando en OBSTACLE desde bandera true" << std::endl;
-			differentialrobot_proxy->setSpeedBase(0, 1.5 * rot);
+			differentialrobot_proxy->setSpeedBase(0, 1.2 * rot);
 			obstacle(tr);
 			return;
 		}
@@ -211,7 +223,7 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 
 		if (fabs(alfa) < 0.05)
 		{
-			differentialrobot_proxy->setSpeedBase(200, 0);
+			differentialrobot_proxy->setSpeedBase(400, 0);
 			bandera = false;
 			return;
 		}
@@ -226,9 +238,9 @@ void SpecificWorker::gotoTarget(const RoboCompLaser::TLaserData &ldata)
 void SpecificWorker::bichote(const RoboCompLaser::TLaserData &ldata)
 {
 	std::cout << "BICHOTE" << std::endl;
-	differentialrobot_proxy->setSpeedBase(0, 1.5);
-	if (ldata.front().dist < threshold || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
-	{
+	if (ldata.front().dist < threshold + 50 || ldata[sizeof(ldata) / 2].dist < threshold || ldata.back().dist < threshold)
+	{   
+		differentialrobot_proxy->setSpeedBase(0, 1.5);
 		std::cout << "RODEAR" << std::endl;
 		currentState = State::BUG;
 		return;

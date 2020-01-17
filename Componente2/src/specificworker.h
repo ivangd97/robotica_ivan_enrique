@@ -85,7 +85,7 @@ private:
 	bool visto = true;
 	bool bandera=false;
 	float distInicio = 0;
-	const float threshold = 250; // millimeters
+	const float threshold = 300; // millimeters
 	float rot = 0.8;			 // rads per second
 	enum class State{CHOQUE,GIRO_ROT,AVANZAR_BACK,AVANZAR,AVANZAR_FRONT,IDLE, ORIENTAR,PARAR,BUG};
 	State currentState = State::IDLE;	
